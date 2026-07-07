@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://dkwjllcrq21jv"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_main"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Ground" type="Node2D" parent="Map"]
+
+[node name="BaseGrass" type="Polygon2D" parent="Map/Ground"]
+color = Color(0.227451, 0.533333, 0.270588, 1)
+polygon = PackedVector2Array(-512, -288, 512, -288, 512, 288, -512, 288)
+
+[node name="BlockedTerrain" type="Node2D" parent="Map"]
+
+[node name="RockPatchNorthWest" type="Polygon2D" parent="Map/BlockedTerrain"]
+color = Color(0.294118, 0.321569, 0.301961, 1)
+polygon = PackedVector2Array(-456, -244, -296, -244, -296, -136, -456, -136)
+
+[node name="RockPatchSouthEast" type="Polygon2D" parent="Map/BlockedTerrain"]
+color = Color(0.294118, 0.321569, 0.301961, 1)
+polygon = PackedVector2Array(268, 124, 456, 124, 456, 248, 268, 248)
+
+[node name="Path" type="Node2D" parent="Map"]
+
+[node name="PathPreview" type="Line2D" parent="Map/Path"]
+points = PackedVector2Array(-440, 96, -272, 96, -272, -64, -48, -64, -48, 88, 184, 88, 184, -104, 424, -104)
+width = 56.0
+default_color = Color(0.65098, 0.482353, 0.301961, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="PathCenterLine" type="Line2D" parent="Map/Path"]
+points = PackedVector2Array(-440, 96, -272, 96, -272, -64, -48, -64, -48, 88, 184, 88, 184, -104, 424, -104)
+width = 4.0
+default_color = Color(0.905882, 0.8, 0.541176, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="PathPoints" type="Node2D" parent="Map/Path"]
+
+[node name="Point01" type="Marker2D" parent="Map/Path/PathPoints"]
+position = Vector2(-440, 96)
+
+[node name="Point02" type="Marker2D" parent="Map/Path/PathPoints"]
+position = Vector2(-272, 96)
+
+[node name="Point03" type="Marker2D" parent="Map/Path/PathPoints"]
+position = Vector2(-272, -64)
+
+[node name="Point04" type="Marker2D" parent="Map/Path/PathPoints"]
+position = Vector2(-48, -64)
+
+[node name="Point05" type="Marker2D" parent="Map/Path/PathPoints"]
+position = Vector2(-48, 88)
+
+[node name="Point06" type="Marker2D" parent="Map/Path/PathPoints"]
+position = Vector2(184, 88)
+
+[node name="Point07" type="Marker2D" parent="Map/Path/PathPoints"]
+position = Vector2(184, -104)
+
+[node name="Point08" type="Marker2D" parent="Map/Path/PathPoints"]
+position = Vector2(424, -104)
+
+[node name="BuildZones" type="Node2D" parent="Map"]
+
+[node name="ZoneNorth" type="Polygon2D" parent="Map/BuildZones"]
+color = Color(0.121569, 0.431373, 0.654902, 0.35)
+polygon = PackedVector2Array(-216, -220, 112, -220, 112, -112, -216, -112)
+
+[node name="ZoneCenter" type="Polygon2D" parent="Map/BuildZones"]
+color = Color(0.121569, 0.431373, 0.654902, 0.35)
+polygon = PackedVector2Array(-224, 8, -104, 8, -104, 216, -224, 216)
+
+[node name="ZoneSouth" type="Polygon2D" parent="Map/BuildZones"]
+color = Color(0.121569, 0.431373, 0.654902, 0.35)
+polygon = PackedVector2Array(48, 144, 248, 144, 248, 252, 48, 252)
+
+[node name="StartPoint" type="Marker2D" parent="Map"]
+position = Vector2(-440, 96)
+
+[node name="StartArea" type="Polygon2D" parent="Map/StartPoint"]
+color = Color(0.156863, 0.772549, 0.462745, 0.65)
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[node name="EndPoint" type="Marker2D" parent="Map"]
+position = Vector2(424, -104)
+
+[node name="GoalArea" type="Polygon2D" parent="Map/EndPoint"]
+color = Color(0.858824, 0.211765, 0.211765, 0.65)
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 0)
+enabled = true
+zoom = Vector2(1.1, 1.1)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MapStatus" type="Label" parent="UI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 560.0
+offset_bottom = 48.0
+text = "Milestone 1: Static map blockout"
+
+[node name="EditorHint" type="Label" parent="UI"]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 760.0
+offset_bottom = 88.0
+text = "Paint/adjust the map in the editor, but keep the named nodes unless we agree to rename them."
