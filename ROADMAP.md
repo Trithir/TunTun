@@ -22,6 +22,7 @@ The immediate goal is not full combat, AI, economy, or procedural generation. Th
 - A HUD that shows assault progress.
 - A retreat option so the player can abandon a bad assault and fall back to an earlier foothold.
 - A visible troop queue so assault planning feels concrete before the wave starts.
+- A launch phase where the player can release queued troops manually for better timing.
 
 ## Progress Log
 
@@ -51,6 +52,14 @@ The immediate goal is not full combat, AI, economy, or procedural generation. Th
 - Added the first troop queue concept: the player can stack troops visually before launching, remove queued troops, and watch the queue drain as troops spawn.
 - Confirmed the start/retreat/progress HUD, troop buttons, and spawn queue are working in the prototype.
 - Noted that HUD alignment and layout polish still need a cleanup pass.
+- Completed a first HUD alignment pass with grouped status, planning controls, and queue panels.
+- Added a top castle-health bar, moved the assault planner into a left dock, renamed Start Assault to Launch, and capped the troop queue by stage.
+- Changed launched assaults so queued troop icons are clicked manually to release attackers onto the path.
+- Added the first sentry prototype: starter sentries appear on the map, scan for attackers in range, and damage them.
+- Added five Stage 1 sentry spawn markers and changed the computer defender setup to randomly choose sentry positions from those markers.
+- Extracted the HUD, defender setup, assault queue/spawning, and sentry spawn markers into reusable scenes/scripts.
+- Added first combat feedback: sentries animate a brief shot/recoil when firing, and mobs flash/show health only after taking damage.
+- Added the first defender budget pass: Stage 1 gives the computer a small budget, and basic sentries spend from it.
 
 ## Near-Term Milestones
 
@@ -75,8 +84,11 @@ The immediate goal is not full combat, AI, economy, or procedural generation. Th
 - [x] Let the player choose troop types before launching.
 - [x] Show a vertical spawn order legend.
 - [x] Let the player remove troops from the queue before launching.
-- [ ] Clean up HUD alignment and spacing.
+- [x] Clean up HUD alignment and spacing.
+- [x] Add a per-stage queue limit that grows as the player advances.
+- [x] Extract the HUD into a reusable scene.
 - [ ] Let the player choose from visible spawn points.
+- [x] After launching, let the player click queued troop icons to release troops manually.
 - [ ] Add a troop point pool for building an army.
 
 ### Milestone 3: Basic Mob Movement And Assaults
@@ -100,15 +112,24 @@ The immediate goal is not full combat, AI, economy, or procedural generation. Th
 
 ### Milestone 5: Defender Setup
 
-- Give the computer a simple budget.
-- Let it place basic sentries, roadblocks, or towers on valid tiles.
-- Randomize defender placement from allowed positions for each level or stage.
+- [x] Add simple sentry placeholders to the map.
+- [x] Add Stage 1 sentry spawn points.
+- [x] Let sentries detect attackers in range.
+- [x] Let sentries damage attackers.
+- [x] Extract defender setup into a reusable manager scene.
+- [x] Extract sentry spawn points into reusable scene instances.
+- [x] Give the computer a simple budget.
+- [x] Let it place basic sentries on valid marker positions.
+- [x] Randomize defender placement from allowed Stage 1 sentry positions.
+- Let it place roadblocks or other tower types on valid positions.
 - Start with deterministic placement before adding smarter behavior.
 
 ### Milestone 6: Combat Loop
 
-- Defender sentries/towers target mobs in range.
-- Mobs have health and speed.
+- [x] Defender sentries/towers target mobs in range.
+- [x] Mobs have health and speed.
+- [x] Show basic sentry firing feedback.
+- [x] Show basic mob damage/health feedback.
 - Roadblocks can be damaged or bypassed.
 - Player wins by cracking the castle or getting enough troops through; computer wins by stopping the assault.
 
@@ -117,6 +138,7 @@ The immediate goal is not full combat, AI, economy, or procedural generation. Th
 - The player should feel like they are outsmarting a defender, not just spawning units on cooldown.
 - Early decisions can be simple: choose troop mix, choose spawn point, launch assault.
 - The spawn order should be visible before launch. Troop icons should drain from the queue as they enter the map.
+- Manual troop release after launch should become a near-term strategy feature: the player plans the army first, launches the assault, then clicks troop icons from the queue to send attackers at chosen timings.
 - The computer defense should be understandable. If it places a tower, the player should be able to tell why that spot matters.
 - Avoid complex pathfinding until the basic loop is fun.
 - Painted tiles are visual. Gameplay paths should use explicit `Path2D` nodes.

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=4]
+
+[ext_resource type="Script" path="res://Scripts/sentry.gd" id="1_sentry"]
+
+[node name="Sentry" type="Node2D"]
+script = ExtResource("1_sentry")

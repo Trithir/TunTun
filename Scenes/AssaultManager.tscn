@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=4]
+
+[ext_resource type="Script" path="res://Scripts/assault_manager.gd" id="1_assault_manager"]
+
+[node name="AssaultManager" type="Node"]
+script = ExtResource("1_assault_manager")
