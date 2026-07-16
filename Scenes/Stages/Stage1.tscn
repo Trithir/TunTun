@@ -4373,9 +4373,10 @@ _data = {
 point_count = 10
 
 [node name="Map" type="Node2D" unique_id=974528316]
-position = Vector2(575, 307)
+position = Vector2(553, 301)
 
 [node name="PaintedMap" type="Node2D" parent="." unique_id=910583825]
+position = Vector2(-563, -303)
 
 [node name="TileLayers" type="Node2D" parent="PaintedMap" unique_id=1026735498]
 
@@ -4386,6 +4387,7 @@ tile_set = SubResource("TileSet_a3567")
 [node name="DecorationSprites" type="Node2D" parent="PaintedMap" unique_id=259626961]
 
 [node name="Path" type="Node2D" parent="." unique_id=764540296]
+position = Vector2(-557, -307)
 
 [node name="MobPath" type="Path2D" parent="Path" unique_id=101336634]
 position = Vector2(8, 51)
@@ -4395,6 +4397,7 @@ curve = SubResource("Curve2D_mob_path")
 [node name="BuildZones" type="Node2D" parent="." unique_id=475891376]
 
 [node name="Defenders" type="Node2D" parent="." unique_id=968951370]
+position = Vector2(-561, -304)
 
 [node name="Sentries" type="Node2D" parent="Defenders" unique_id=1231311072]
 
