@@ -68,16 +68,16 @@ autowrap_mode = 2
 
 [node name="LaunchAssaultButton" type="Button" parent="."]
 offset_left = 24.0
-offset_top = 326.0
+offset_top = 366.0
 offset_right = 232.0
-offset_bottom = 360.0
+offset_bottom = 400.0
 text = "Launch Assault"
 
 [node name="RetreatButton" type="Button" parent="."]
 offset_left = 24.0
-offset_top = 366.0
+offset_top = 406.0
 offset_right = 232.0
-offset_bottom = 400.0
+offset_bottom = 440.0
 text = "Retreat"
 
 [node name="TroopSelectLabel" type="Label" parent="."]
@@ -109,16 +109,23 @@ offset_right = 232.0
 offset_bottom = 314.0
 text = "Brute"
 
+[node name="RangedButton" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 320.0
+offset_right = 232.0
+offset_bottom = 354.0
+text = "Ranged"
+
 [node name="QueueCountLabel" type="Label" parent="."]
 offset_left = 24.0
-offset_top = 410.0
+offset_top = 450.0
 offset_right = 232.0
-offset_bottom = 432.0
+offset_bottom = 472.0
 text = "Queue: 0 / 5"
 
 [node name="QueuePanel" type="PanelContainer" parent="."]
 offset_left = 24.0
-offset_top = 436.0
+offset_top = 476.0
 offset_right = 232.0
 offset_bottom = 636.0
 

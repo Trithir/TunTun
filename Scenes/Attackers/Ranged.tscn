@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=4]
+
+[ext_resource type="PackedScene" path="res://Scenes/Attackers/AttackerBase.tscn" id="1_attacker_base"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_attack_range"]
+radius = 120.0
+
+[node name="Ranged" instance=ExtResource("1_attacker_base")]
+troop_type = "ranged"
+display_name = "Ranged"
+short_name = "A"
+speed = 78.0
+max_health = 8
+damage = 2
+army_cost = 2
+base_color = Color(0.2, 0.85, 0.55, 1)
+sprite_scale = Vector2(1, 1)
+
+[node name="AttackOrigin" type="Marker2D" parent="." index="3"]
+position = Vector2(0, -14)
+
+[node name="AttackRange" type="Area2D" parent="." index="4"]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+shape = SubResource("CircleShape2D_attack_range")

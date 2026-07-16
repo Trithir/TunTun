@@ -1,6 +1,7 @@
 @tool
 extends CanvasLayer
 
+# LEARN_NOTE: HUD emits signals instead of changing gameplay directly; Main listens and decides what happens.
 signal launch_assault_requested
 signal retreat_requested
 signal troop_requested(troop_type: String)
@@ -11,6 +12,7 @@ signal queue_icon_pressed(index: int)
 		hide_in_editor = value
 		update_editor_visibility()
 
+# LEARN_NOTE: These @onready paths must match node names in Scenes/HUD.tscn.
 @onready var progress_label: Label = $ProgressLabel as Label
 @onready var castle_label: Label = $CastleLabel as Label
 @onready var castle_health_bar: ProgressBar = $CastleHealthBar as ProgressBar
@@ -21,19 +23,23 @@ signal queue_icon_pressed(index: int)
 @onready var grunt_button: Button = $GruntButton as Button
 @onready var runner_button: Button = $RunnerButton as Button
 @onready var brute_button: Button = $BruteButton as Button
+@onready var ranged_button: Button = $RangedButton as Button
 @onready var queue_count_label: Label = $QueueCountLabel as Label
 @onready var queue_list: GridContainer = $QueuePanel/QueueList as GridContainer
 
 func _ready() -> void:
+# LEARN_NOTE: @tool lets the HUD hide itself in the editor when instanced in Main, but still show when editing HUD.tscn directly.
 	update_editor_visibility()
 	if Engine.is_editor_hint():
 		return
 
+# LEARN_NOTE: Button presses become signals that Main connects to gameplay actions.
 	launch_assault_button.pressed.connect(func() -> void: launch_assault_requested.emit())
 	retreat_button.pressed.connect(func() -> void: retreat_requested.emit())
 	grunt_button.pressed.connect(func() -> void: troop_requested.emit("grunt"))
 	runner_button.pressed.connect(func() -> void: troop_requested.emit("runner"))
 	brute_button.pressed.connect(func() -> void: troop_requested.emit("brute"))
+	ranged_button.pressed.connect(func() -> void: troop_requested.emit("ranged"))
 
 func update_editor_visibility() -> void:
 	if Engine.is_editor_hint():
@@ -42,6 +48,7 @@ func update_editor_visibility() -> void:
 		visible = true
 
 func update_status(
+# LEARN_NOTE: Main calls update_status whenever visible HUD numbers/buttons may need to change.
 	stage_number: int,
 	wave_number: int,
 	troops_through: int,
@@ -63,15 +70,18 @@ func update_status(
 		assault_status_label.text = "Ready to plan."
 
 	launch_assault_button.disabled = assault_active or queue_size == 0
-	retreat_button.disabled = not assault_active and stage_number <= 1
+	retreat_button.disabled = not assault_active
 	queue_count_label.text = "Queue: %s / %s" % [queue_size, queue_limit]
 
 	var queue_full: bool = queue_size >= queue_limit
+# LEARN_NOTE: Troop buttons are locked during an assault because assault mode uses queue clicks to release units.
 	grunt_button.disabled = assault_active or queue_full
 	runner_button.disabled = assault_active or queue_full
 	brute_button.disabled = assault_active or queue_full
+	ranged_button.disabled = assault_active or queue_full
 
 func rebuild_queue(queue: Array[String], troop_types: Dictionary, assault_active: bool) -> void:
+# LEARN_NOTE: Queue buttons are created dynamically so the UI always mirrors the current planned/releasable troop order.
 	for child in queue_list.get_children():
 		child.queue_free()
 

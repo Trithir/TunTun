@@ -60,6 +60,10 @@ The immediate goal is not full combat, AI, economy, or procedural generation. Th
 - Extracted the HUD, defender setup, assault queue/spawning, and sentry spawn markers into reusable scenes/scripts.
 - Added first combat feedback: sentries animate a brief shot/recoil when firing, and mobs flash/show health only after taking damage.
 - Added the first defender budget pass: Stage 1 gives the computer a small budget, and basic sentries spend from it.
+- Removed obsolete `StartPoint` and `EndPoint` editor markers; mob start/end now come from the first and last points of `Map/Path/MobPath`.
+- Extracted the current map into `Scenes/Stages/Stage1.tscn` so `Scenes/Main.tscn` can stay as the lightweight game shell.
+- Added reusable attacker scenes for Grunt, Runner, Brute, and Ranged units, all inheriting from a shared attacker base.
+- Added reusable defender tower scenes for Stage 1, Stage 2, and Stage 3 towers, all inheriting from a shared tower base.
 
 ## Near-Term Milestones
 
@@ -99,10 +103,12 @@ The immediate goal is not full combat, AI, economy, or procedural generation. Th
 - [x] Count troops that make it through.
 - [x] Let the player retreat from a bad assault.
 - [x] Spawn a chosen troop queue instead of a fixed test wave.
+- [x] Extract attacker types into reusable scenes.
 - [x] End the assault cleanly when all mobs are gone.
 
 ### Milestone 4: Progressive Map Reveal
 
+- [x] Create a separate scene for Stage 1.
 - Define stage sections of the map.
 - Start with only the first section active/important.
 - When enough troops make it through, advance the stage.
@@ -121,6 +127,7 @@ The immediate goal is not full combat, AI, economy, or procedural generation. Th
 - [x] Give the computer a simple budget.
 - [x] Let it place basic sentries on valid marker positions.
 - [x] Randomize defender placement from allowed Stage 1 sentry positions.
+- [x] Extract staged tower types into reusable scenes.
 - Let it place roadblocks or other tower types on valid positions.
 - Start with deterministic placement before adding smarter behavior.
 
@@ -142,6 +149,7 @@ The immediate goal is not full combat, AI, economy, or procedural generation. Th
 - The computer defense should be understandable. If it places a tower, the player should be able to tell why that spot matters.
 - Avoid complex pathfinding until the basic loop is fun.
 - Painted tiles are visual. Gameplay paths should use explicit `Path2D` nodes.
+- The mob route's first and last `Path2D` points define the current gameplay start and end.
 - Roadblocks, sentries, gates, and spawn points should be separate gameplay nodes, not inferred from tile art yet.
 - Retreat should be tactical, not pure failure. It should clear active attackers, preserve enough information for the player to learn from the failed push, and eventually move the view back to the previous foothold.
 - Stronger troops should eventually cost more from an army point pool, so the player chooses between quantity, speed, and durability.

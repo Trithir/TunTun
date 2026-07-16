@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=4]
+
+[ext_resource type="PackedScene" path="res://Scenes/Defenders/TowerBase.tscn" id="1_tower_base"]
+
+[node name="Stage2Tower" instance=ExtResource("1_tower_base")]
+tower_type = "stage_2_tower"
+display_name = "Stage 2 Tower"
+attack_range = 190.0
+damage = 3
+fire_interval = 0.65
+base_color = Color(0.95, 0.35, 0.18, 1)

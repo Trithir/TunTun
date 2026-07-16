@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=4]
+
+[ext_resource type="PackedScene" path="res://Scenes/Attackers/AttackerBase.tscn" id="1_attacker_base"]
+
+[node name="Grunt" instance=ExtResource("1_attacker_base")]
+troop_type = "grunt"
+display_name = "Grunt"
+short_name = "G"
+speed = 90.0
+max_health = 10
+damage = 0
+army_cost = 1
+base_color = Color(0.760784, 0.2, 0.145098, 1)
+sprite_scale = Vector2(1, 1)
